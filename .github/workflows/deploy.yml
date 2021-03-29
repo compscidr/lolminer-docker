@@ -15,6 +15,7 @@ jobs:
       - name: build image
         run: docker build -f Dockerfile -t lolminer-docker:${{ github.sha }} .
       - name: tag and push
+        run: |
         docker tag lolminer-docker:${{ github.sha }} compscidr/lolminer-docker:${{ github.event.release.tag_name }}
         docker push compscidr/lolminer-docker:${{ github.event.release.tag_name }}
       - name: Logout of Docker Hub
