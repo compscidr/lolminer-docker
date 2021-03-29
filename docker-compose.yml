@@ -1,0 +1,10 @@
+version: '2.3'
+services:
+  lolminer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: compscidr/lolminer:dev
+    container_name: lolminer
+    devices:
+       - /dev/dri:/dev/dri # for GPU access
