@@ -14,11 +14,9 @@ jobs:
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
       - name: build image
         run: docker build -f Dockerfile -t lolminer-docker:${{ github.sha }} .
-      - name: Set env
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: tag and push
         run: |
-        docker tag lolminer-docker:${{ github.sha }} compscidr/lolminer-docker:${{ env.RELEASE_VERSION }}
-        docker push compscidr/lolminer-docker:${{ env.RELEASE_VERSION }}
+          docker tag lolminer-docker:${{ github.sha }} compscidr/lolminer-docker:${{ github.event.release.tag_name }}
+          docker push compscidr/lolminer-docker:${{ github.event.release.tag_name }}
       - name: Logout of Docker Hub
         run: docker logout
