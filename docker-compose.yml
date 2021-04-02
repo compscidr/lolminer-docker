@@ -8,3 +8,9 @@ services:
     container_name: lolminer
     devices:
        - /dev/dri:/dev/dri # for GPU access
+    environment:
+      - COIN=ETH
+      - HOST=eth.2miners.com
+      - PORT=2020
+      - WALLET=0x74ba897f65f04008d8eff364efcc54b0a20e17eb
+      - MACHINE=docker
