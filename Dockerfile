@@ -8,7 +8,7 @@ ARG MACHINE=docker
 ENV COIN=$COIN \
     HOST=$HOST \
     PORT=$PORT \
-    WALLET=$WALLET
+    WALLET=$WALLET \
     MACHINE=$MACHINE
 
 # todo split out amd gpu pro into another docker image
