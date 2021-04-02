@@ -1,0 +1,11 @@
+name: Build container
+on:
+  push:
+
+jobs:
+  build:
+    name: Build container
+    runs-on: ubuntu-20.04
+    steps:
+      - name: build image
+        run: docker build -f Dockerfile -t lolminer-docker:${{ github.sha }} .
