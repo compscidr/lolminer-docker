@@ -9,10 +9,14 @@ AMD drivers in the most recent Ubuntu OS's).
 
 ## Running:
 From dockerhub:
-`docker run -e COIN=YOURCOIN -e HOST=POOLHOST -e PORT=POOLPORT -e WALLET=YOURWALLET -e MACHINE_NAME compscidr/lolminer-docker`
+```
+docker run --device=/dev/dri:/dev/dri -e COIN=YOURCOIN -e HOST=POOLHOST -e PORT=POOLPORT -e WALLET=YOURWALLET -e MACHINE_NAME compscidr/lolminer-docker
+```
 
 For instance:
-`docker run -e COIN=ETH -e HOST=eth.2miners.com -e PORT=2020 -e WALLET=0x74ba897f65f04008d8eff364efcc54b0a20e17eb -e docker compscidr/lolminer-docker`
+```
+docker run --device=/dev/dri:/dev/dri -e COIN=ETH -e HOST=eth.2miners.com -e PORT=2020 -e WALLET=0x74ba897f65f04008d8eff364efcc54b0a20e17eb -e docker compscidr/lolminer-docker
+```
 
 Alternatively, use the docker-compose file, adjust the environment variables:
 ```
