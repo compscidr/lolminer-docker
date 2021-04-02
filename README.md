@@ -10,7 +10,7 @@ AMD drivers in the most recent Ubuntu OS's).
 ## Running:
 From dockerhub:
 ```
-docker run --device=/dev/dri:/dev/dri -e COIN=YOURCOIN -e HOST=POOLHOST -e PORT=POOLPORT -e WALLET=YOURWALLET -e MACHINE=docker compscidr/lolminer-docker
+docker run --device=/dev/dri:/dev/dri -e COIN=YOURCOIN -e HOST=POOLHOST -e PORT=POOLPORT -e WALLET=YOURWALLET -e MACHINE=YOURMACHINE compscidr/lolminer-docker
 ```
 
 For instance:
