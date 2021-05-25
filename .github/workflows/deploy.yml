@@ -23,7 +23,7 @@ jobs:
         run: |
           docker tag lolminer-docker:amd-${{ github.sha }} compscidr/lolminer-docker:amd-${{ github.event.release.tag_name }}
           docker push compscidr/lolminer-docker:amd-${{ github.event.release.tag_name }}
-          docker tag lolminer-docker:${{ github.sha }} compscidr/lolminer-docker:latest
+          docker tag lolminer-docker:amd-${{ github.sha }} compscidr/lolminer-docker:latest
           docker push compscidr/lolminer-docker:latest
           docker tag lolminer-docker:nvidia-${{ github.sha }} compscidr/lolminer-docker:nvidia-${{ github.event.release.tag_name }}
           docker push compscidr/lolminer-docker:nvidia-${{ github.event.release.tag_name }}
