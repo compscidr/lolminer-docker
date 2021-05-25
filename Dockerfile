@@ -35,7 +35,6 @@ CMD /lolminer/lolMiner --coin $COIN --pool $HOST --port $PORT --user $WALLET.$MA
 
 ##########################################################
 # nvidia
-#FROM nvidia/cuda:11.3.0-runtime-ubuntu20.04 as nvidia
 FROM nvidia/cuda:10.2-cudnn7-devel as nvidia
 ARG COIN
 ARG HOST
