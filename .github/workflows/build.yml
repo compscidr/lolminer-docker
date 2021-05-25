@@ -8,5 +8,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - name: build image
-        run: docker build -f Dockerfile -t lolminer-docker:${{ github.sha }} .
+      - name: build amd image
+        run: docker build -f Dockerfile --target amd -t lolminer-docker:amd-${{ github.sha }} .
+      - name: build nvidia image
+        run: docker build -f Dockerfile --target nvidia -t lolminer-docker:nvidia-${{ github.sha }} .

@@ -15,13 +15,17 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-      - name: build image
-        run: docker build -f Dockerfile -t lolminer-docker:${{ github.sha }} .
+      - name: build amd image
+        run: docker build -f Dockerfile --target amd -t lolminer-docker:amd-${{ github.sha }} .
+      - name: build nvidia image
+        run: docker build -f Dockerfile --target nvidia -t lolminer-docker:nvidia-${{ github.sha }} .
       - name: tag and push
         run: |
-          docker tag lolminer-docker:${{ github.sha }} compscidr/lolminer-docker:${{ github.event.release.tag_name }}
-          docker push compscidr/lolminer-docker:${{ github.event.release.tag_name }}
+          docker tag lolminer-docker:amd-${{ github.sha }} compscidr/lolminer-docker:amd-${{ github.event.release.tag_name }}
+          docker push compscidr/lolminer-docker:amd-${{ github.event.release.tag_name }}
           docker tag lolminer-docker:${{ github.sha }} compscidr/lolminer-docker:latest
           docker push compscidr/lolminer-docker:latest
+          docker tag lolminer-docker:nvidia-${{ github.sha }} compscidr/lolminer-docker:nvidia-${{ github.event.release.tag_name }}
+          docker push compscidr/lolminer-docker:nvidia-${{ github.event.release.tag_name }}
       - name: Logout of Docker Hub
         run: docker logout

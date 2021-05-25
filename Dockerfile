@@ -1,9 +1,19 @@
-FROM guenterbailey/amdgpu:ubuntu_1604_18.30
 ARG COIN=ETH
 ARG HOST=eth.2miners.com
 ARG PORT=2020
 ARG WALLET=0x74ba897f65f04008d8eff364efcc54b0a20e17eb
 ARG MACHINE=docker
+ARG LOLMINER_VERSION=1.29
+
+##########################################################
+# amd
+FROM guenterbailey/amdgpu:ubuntu_1604_18.30 as amd
+ARG COIN
+ARG HOST
+ARG PORT
+ARG WALLET
+ARG MACHINE
+ARG LOLMINER_VERSION
 
 ENV COIN=$COIN \
     HOST=$HOST \
@@ -18,6 +28,35 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no
   tar \
   ca-certificates
 
-RUN mkdir /lolminer && wget https://github.com/Lolliedieb/lolMiner-releases/releases/download/1.24/lolMiner_v1.24a_Lin64.tar.gz  && tar xvf lolMiner_v1.24a_Lin64.tar.gz -C /lolminer
+RUN mkdir /lolminer && wget -O lolminer.tar.gz https://github.com/Lolliedieb/lolMiner-releases/releases/download/${LOLMINER_VERSION}/lolMiner_v${LOLMINER_VERSION}_Lin64.tar.gz  \
+  && tar xvf lolminer.tar.gz --strip-components 1 -C /lolminer
 
-CMD /lolminer/1.24a/lolMiner --coin $COIN --pool $HOST --port $PORT --user $WALLET.$MACHINE
+CMD /lolminer/lolMiner --coin $COIN --pool $HOST --port $PORT --user $WALLET.$MACHINE
+
+##########################################################
+# nvidia
+FROM nvidia/cuda:10.2-cudnn7-devel as nvidia
+ARG COIN
+ARG HOST
+ARG PORT
+ARG WALLET
+ARG MACHINE
+ARG LOLMINER_VERSION
+
+ENV COIN=$COIN \
+    HOST=$HOST \
+    PORT=$PORT \
+    WALLET=$WALLET \
+    MACHINE=$MACHINE
+
+# todo split out amd gpu pro into another docker image
+RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+  curl \
+  wget \
+  tar \
+  ca-certificates
+
+  RUN mkdir /lolminer && wget -O lolminer.tar.gz https://github.com/Lolliedieb/lolMiner-releases/releases/download/${LOLMINER_VERSION}/lolMiner_v${LOLMINER_VERSION}_Lin64.tar.gz  \
+    && tar xvf lolminer.tar.gz --strip-components 1 -C /lolminer
+
+  CMD /lolminer/lolMiner --coin $COIN --pool $HOST --port $PORT --user $WALLET.$MACHINE
