@@ -1,15 +1,14 @@
 ![https://github.com/compscidr/lolminer-docker/actions/workflows/build.yml](https://github.com/compscidr/lolminer-docker/actions/workflows/build.yml/badge.svg)
 # lolminer-docker
 Tried to make it as simple as possible to run the miner without worrying about
-drivers or the mining software.
+drivers or the mining software (at least on amd).
 
+## amd:
 Tested with Ubuntu 20.04 and 20.10 host operating systems without any special
 drivers installed on the host OS (ie, don't need to worry about the mess of
 AMD drivers in the most recent Ubuntu OS's).
 
 https://hub.docker.com/repository/docker/compscidr/lolminer-docker
-
-## amd:
 From dockerhub:
 ```
 docker run --device=/dev/dri:/dev/dri -e COIN=YOURCOIN -e HOST=POOLHOST -e PORT=POOLPORT -e WALLET=YOURWALLET -e MACHINE=YOURMACHINE compscidr/lolminer-docker:amd-1.29
@@ -28,7 +27,7 @@ docker-compose up
 
 The only fees are the lolminer fees, I didn't add any additional fees.
 
-## nvidia
+## nvidia:
 On the host, you need a bit more work to get the nvidia docker runtime:
 ```
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
