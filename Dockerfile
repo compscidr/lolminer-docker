@@ -3,7 +3,7 @@ ARG HOST=eth.2miners.com
 ARG PORT=2020
 ARG WALLET=0x74ba897f65f04008d8eff364efcc54b0a20e17eb
 ARG MACHINE=docker
-ARG LOLMINER_VERSION=1.29
+ARG LOLMINER_VERSION=1.33
 
 ##########################################################
 # amd
@@ -35,7 +35,7 @@ CMD /lolminer/lolMiner --coin $COIN --pool $HOST --port $PORT --user $WALLET.$MA
 
 ##########################################################
 # nvidia
-FROM nvidia/cuda:10.2-cudnn7-devel as nvidia
+FROM nvidia/cuda:11.4.2-base-ubuntu20.04 as nvidia
 ARG COIN
 ARG HOST
 ARG PORT
@@ -59,4 +59,4 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no
   RUN mkdir /lolminer && wget -O lolminer.tar.gz https://github.com/Lolliedieb/lolMiner-releases/releases/download/${LOLMINER_VERSION}/lolMiner_v${LOLMINER_VERSION}_Lin64.tar.gz  \
     && tar xvf lolminer.tar.gz --strip-components 1 -C /lolminer
 
-  CMD /lolminer/lolMiner --coin $COIN --pool $HOST --port $PORT --user $WALLET.$MACHINE
+CMD /lolminer/lolMiner --coin $COIN --pool $HOST --port $PORT --user $WALLET.$MACHINE

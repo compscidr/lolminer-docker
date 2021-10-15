@@ -39,3 +39,5 @@ sudo systemctl restart docker
 
 docker run --gpus all -e COIN=YOURCOIN -e HOST=POOLHOST -e PORT=POOLPORT -e WALLET=YOURWALLET -e MACHINE=YOURMACHINE compscidr/lolminer-docker:nvidia-1.29
 ```
+
+Confirmed working with a ubuntu20.04 host and an nvidia rtx 3080 gpu.
