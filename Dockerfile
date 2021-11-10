@@ -19,12 +19,16 @@ ARG PORT
 ARG WALLET
 ARG MACHINE
 ARG LOLMINER_VERSION
+ARG APIPORT
+ARG APIHOST
 
 ENV COIN=$COIN \
     HOST=$HOST \
     PORT=$PORT \
     WALLET=$WALLET \
-    MACHINE=$MACHINE
+    MACHINE=$MACHINE \
+    APIPORT=$APIPORT \
+    APIHOST=$APIHOST
 
 # todo split out amd gpu pro into another docker image
 RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
@@ -47,12 +51,16 @@ ARG PORT
 ARG WALLET
 ARG MACHINE
 ARG LOLMINER_VERSION
+ARG APIPORT
+ARG APIHOST
 
 ENV COIN=$COIN \
     HOST=$HOST \
     PORT=$PORT \
     WALLET=$WALLET \
     MACHINE=$MACHINE
+    APIPORT=$APIPORT \
+    APIHOST=$APIHOST
 
 # todo split out amd gpu pro into another docker image
 RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
