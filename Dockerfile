@@ -12,7 +12,7 @@ ARG APIHOST=0.0.0.0
 
 ##########################################################
 # amd
-FROM guenterbailey/amdgpu:ubuntu_1604_18.30 as amd
+FROM compscidr/amdgpu:ubuntu_20.04_21.30 as amd
 ARG COIN
 ARG HOST
 ARG PORT
