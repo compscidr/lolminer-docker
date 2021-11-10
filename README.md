@@ -11,12 +11,12 @@ AMD drivers in the most recent Ubuntu OS's).
 https://hub.docker.com/repository/docker/compscidr/lolminer-docker
 From dockerhub:
 ```
-docker run --device=/dev/dri:/dev/dri -e COIN=YOURCOIN -e HOST=POOLHOST -e PORT=POOLPORT -e WALLET=YOURWALLET -e MACHINE=YOURMACHINE compscidr/lolminer-docker:amd-1.33
+docker run --device=/dev/dri:/dev/dri -e COIN=YOURCOIN -e HOST=POOLHOST -e PORT=POOLPORT -e WALLET=YOURWALLET -e MACHINE=YOURMACHINE -e APIHOST=somehost -e APIPORT=someport compscidr/lolminer-docker:amd-1.35
 ```
 
 For instance:
 ```
-docker run --device=/dev/dri:/dev/dri -e COIN=ETH -e HOST=eth.2miners.com -e PORT=2020 -e WALLET=0x74ba897f65f04008d8eff364efcc54b0a20e17eb -e MACHINE=docker compscidr/lolminer-docker:amd-1.33
+docker run --device=/dev/dri:/dev/dri -e COIN=ETH -e HOST=eth.2miners.com -e PORT=2020 -e WALLET=0x74ba897f65f04008d8eff364efcc54b0a20e17eb -e MACHINE=docker -e APIHOST=0.0.0.0 -e APIPORT=4069 compscidr/lolminer-docker:amd-1.35
 ```
 
 Alternatively, use the docker-compose file, adjust the environment variables:
@@ -37,7 +37,7 @@ curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.li
 sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
 sudo systemctl restart docker
 
-docker run --gpus all -e COIN=YOURCOIN -e HOST=POOLHOST -e PORT=POOLPORT -e WALLET=YOURWALLET -e MACHINE=YOURMACHINE compscidr/lolminer-docker:nvidia-1.33
+docker run --gpus all -e COIN=YOURCOIN -e HOST=POOLHOST -e PORT=POOLPORT -e WALLET=YOURWALLET -e MACHINE=YOURMACHINE -e APIHOST=0.0.0.0 -e APIPORT=4069 compscidr/lolminer-docker:nvidia-1.35
 ```
 
 Confirmed working with a ubuntu20.04 host and an nvidia rtx 3080 gpu.
