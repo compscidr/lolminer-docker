@@ -3,7 +3,7 @@ ARG HOST=eth.2miners.com
 ARG PORT=2020
 ARG WALLET=0x74ba897f65f04008d8eff364efcc54b0a20e17eb
 ARG MACHINE=docker
-ARG LOLMINER_VERSION=1.42
+ARG LOLMINER_VERSION=1.46a
 
 # to make compatible with this prometheus exporter:
 # https://github.com/platofff/prometheus-mining
