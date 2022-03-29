@@ -11,18 +11,18 @@ AMD drivers in the most recent Ubuntu OS's).
 https://hub.docker.com/repository/docker/compscidr/lolminer-docker
 From dockerhub:
 ```
-docker run --device=/dev/dri:/dev/dri compscidr/lolminer-docker:amd-1.47 <insert lolminer args>
+docker run --device=/dev/dri:/dev/dri compscidr/lolminer-docker:amd-1.47-c11.4.2 <insert lolminer args>
 ```
 
 For instance:
 ```
-docker run --device=/dev/dri:/dev/dri compscidr/lolminer-docker:amd-1.47 --coin ETH --pool eth.2miners.com --port 2020 --user 0x74ba897f65f04008d8eff364efcc54b0a20e17eb.amd-docker --apihost 0.0.0.0 --apiport 4069
+docker run --device=/dev/dri:/dev/dri compscidr/lolminer-docker:amd-1.47-c11.4.2 --coin ETH --pool eth.2miners.com --port 2020 --user 0x74ba897f65f04008d8eff364efcc54b0a20e17eb.amd-docker --apihost 0.0.0.0 --apiport 4069
 ```
 
 The only fees are the lolminer fees, I didn't add any additional fees.
 
 ## nvidia:
-On the host, you need a bit more work to get the nvidia docker runtime:
+On the host, you need a bit more work to get the nvidia docker runtime (only required once):
 ```
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
 curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
@@ -30,8 +30,11 @@ curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.li
 
 sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
 sudo systemctl restart docker
+```
 
-docker run --gpus all compscidr/lolminer-docker:amd-1.47 --coin ETH --pool eth.2miners.com --port 2020 --user 0x74ba897f65f04008d8eff364efcc54b0a20e17eb.nvidia-docker --apihost 0.0.0.0 --apiport 4069
+Then you can run as follows:
+```
+docker run --gpus all compscidr/lolminer-docker:nvidia-1.47-c11.4.2 --coin ETH --pool eth.2miners.com --port 2020 --user 0x74ba897f65f04008d8eff364efcc54b0a20e17eb.nvidia-docker --apihost 0.0.0.0 --apiport 4069
 ```
 
 Confirmed working with a ubuntu20.04 host and an nvidia rtx 3080 gpu.
