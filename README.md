@@ -22,7 +22,7 @@ docker run --device=/dev/dri:/dev/dri compscidr/lolminer-docker:amd-1.47-c11.4.2
 The only fees are the lolminer fees, I didn't add any additional fees.
 
 ## nvidia:
-On the host, you need a bit more work to get the nvidia docker runtime:
+On the host, you need a bit more work to get the nvidia docker runtime (only required once):
 ```
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
 curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
@@ -30,7 +30,10 @@ curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.li
 
 sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
 sudo systemctl restart docker
+```
 
+Then you can run as follows:
+```
 docker run --gpus all compscidr/lolminer-docker:nvidia-1.47-c11.4.2 --coin ETH --pool eth.2miners.com --port 2020 --user 0x74ba897f65f04008d8eff364efcc54b0a20e17eb.nvidia-docker --apihost 0.0.0.0 --apiport 4069
 ```
 
