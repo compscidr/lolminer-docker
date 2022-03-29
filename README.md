@@ -35,3 +35,14 @@ docker run --gpus all compscidr/lolminer-docker:amd-1.47 --coin ETH --pool eth.2
 ```
 
 Confirmed working with a ubuntu20.04 host and an nvidia rtx 3080 gpu.
+
+## docker-compose
+Alternatively you can use the provided docker-compose file which will build
+everything from source. You will want to update the `entrypoint` within the
+docker-compose.yml file to use your own wallet and arguments for lolminer.
+
+Then for AMD:
+`docker-compose --profile amd up`
+
+and for Nvidia:
+`docker-compose --profile nvidia up`
