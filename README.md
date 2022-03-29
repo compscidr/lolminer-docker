@@ -6,7 +6,8 @@ drivers or the mining software (at least on amd).
 ## amd:
 Tested with Ubuntu 20.04 and 20.10 host operating systems without any special
 drivers installed on the host OS (ie, don't need to worry about the mess of
-AMD drivers in the most recent Ubuntu OS's).
+AMD drivers in the most recent Ubuntu OS's). 
+For physical hardware, tested with rx580, rx480 gpus.
 
 https://hub.docker.com/repository/docker/compscidr/lolminer-docker
 From dockerhub:
