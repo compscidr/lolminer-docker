@@ -1,4 +1,4 @@
-ARG LOLMINER_VERSION=1.47
+ARG LOLMINER_VERSION=1.48
 
 ##########################################################
 # amd
@@ -19,6 +19,7 @@ ENTRYPOINT ["/lolminer/lolMiner"]
 
 ##########################################################
 # nvidia
+# don't bump this because otherwise it breaks on ubuntu 20.04 due to differing cuda version
 FROM nvidia/cuda:11.4.2-base-ubuntu20.04 as nvidia
 ARG LOLMINER_VERSION
 
