@@ -1,4 +1,4 @@
-ARG LOLMINER_VERSION=1.48
+ARG LOLMINER_VERSION=1.49
 
 ##########################################################
 # amd
