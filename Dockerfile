@@ -20,7 +20,7 @@ ENTRYPOINT ["/lolminer/lolMiner"]
 ##########################################################
 # nvidia
 # don't bump this because otherwise it breaks on ubuntu 20.04 due to differing cuda version
-FROM nvidia/cuda:11.4.2-base-ubuntu20.04 as nvidia
+FROM nvidia/cuda:11.7.0-base-ubuntu20.04 as nvidia
 ARG LOLMINER_VERSION
 
 # todo split out amd gpu pro into another docker image
