@@ -10,13 +10,15 @@ jobs:
           cuda: [11.4.2-base]
           lolminer: [1.52a, 1.53]
       runs-on: ubuntu-20.04
-      name: Build container
+      name: Build Nvidia Containers
       steps:
         - uses: actions/checkout@v3
         - name: build nvidia image
           run: docker build -f Dockerfile --build-arg LOLMINER_VERSION=${{ matrix.lolminer }} --build-arg OS_VERSION=${{ matrix.cuda }} --build-arg CUDA_VERSION=${{ matrix.cuda }} --target nvidia -t lolminer-docker:nvidia-${{ github.sha }} .
 
   build-amd:
+    runs-on: ubuntu-20.04
+    name: Build AMD Containers
     steps:
       - uses: actions/checkout@v3
       - name: build amd image
