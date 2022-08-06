@@ -5,7 +5,6 @@ on:
 jobs:
   build-nvidia:
     name: Build container
-    build_matrix:
       strategy:
         matrix:
           os: [ubuntu20.04]
