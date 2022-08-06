@@ -7,6 +7,7 @@ drivers or the mining software (at least on amd).
 Tested with Ubuntu 20.04 and 20.10 host operating systems without any special
 drivers installed on the host OS (ie, don't need to worry about the mess of
 AMD drivers in the most recent Ubuntu OS's).
+
 For physical hardware, tested with rx580, rx480 gpus.
 
 https://hub.docker.com/repository/docker/compscidr/lolminer-docker
@@ -38,7 +39,11 @@ Then you can run as follows:
 docker run --gpus all compscidr/lolminer-docker:nvidia-1.52a-c11.4.2 --coin ETH --pool eth.2miners.com --port 2020 --user 0x74ba897f65f04008d8eff364efcc54b0a20e17eb.nvidia-docker --apihost 0.0.0.0 --apiport 4069
 ```
 
-Confirmed working with a ubuntu20.04 host and an nvidia rtx 3080 gpu.
+Confirmed working with a ubuntu20.04 host and an nvidia rtx 3080 gpu. On a fresh
+Ubuntu 20.04 install, cuda 11.4.2 image will work, however if you've got
+a newer version on your host for some other reason, you can bump to a newer cuda
+version in the image as well if you want. You can check your cuda version and
+gpu driver version with `nvidia-smi`
 
 ## docker-compose
 Alternatively you can use the provided docker-compose file which will build

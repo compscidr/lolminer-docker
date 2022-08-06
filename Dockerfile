@@ -2,7 +2,8 @@ ARG LOLMINER_VERSION=1.52a
 
 ##########################################################
 # amd
-FROM compscidr/amdgpu:ubuntu_20.04_21.30 as amd
+ARG AMD_VERSION=ubuntu_20.04_21.30
+FROM compscidr/amdgpu:$AMD_VERSION as amd
 ARG LOLMINER_VERSION
 
 # todo split out amd gpu pro into another docker image
@@ -20,7 +21,9 @@ ENTRYPOINT ["/lolminer/lolMiner"]
 ##########################################################
 # nvidia
 # don't bump this because otherwise it breaks on ubuntu 20.04 due to differing cuda version
-FROM nvidia/cuda:11.4.2-base-ubuntu20.04 as nvidia
+ARG CUDA_VERSION=11.4.2
+ARG OS_VERSION=ubuntu20.04
+FROM nvidia/cuda:CUDA_VERSION-base-$OS_VERSION as nvidia
 ARG LOLMINER_VERSION
 
 # todo split out amd gpu pro into another docker image
