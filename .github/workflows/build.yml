@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: build nvidia image
-        run: docker build -f Dockerfile --build-arg LOLMINER_VERSION=${{ matrix.lolminer }} --build-arg OS_VERSION=${{ matrix.os }} --build-arg CUDA_VERSION=${{ matrix.cuda }} --target nvidia -t lolminer-docker:${{ matrix.os }}-cuda-${{ matrix.cuda }}-${{ matrix.lolminer }} .
+        run: docker build -f Dockerfile --build-arg CUDA_VERSION=${{ matrix.cuda }} --target nvidia -t lolminer-docker:${{ matrix.os }}-cuda-${{ matrix.cuda }}-${{ matrix.lolminer }} .
 
   build-amd:
     strategy:
@@ -30,4 +30,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: build amd image
-        run: docker build -f Dockerfile --target amd -t lolminer-docker:lolminer-docker:${{ matrix.os }}-amd-${{ matrix.amd_driver }}-${{ matrix.lolminer }} .
+        run: docker build -f Dockerfile --target amd  --build-arg LOLMINER_VERSION=${{ matrix.lolminer }} --build-arg OS_VERSION=${{ matrix.os }} --build-arg AMD_DRIVER=${{ matrix.amd_driver }} -t lolminer-docker:${{ matrix.os }}-amd-${{ matrix.amd_driver }}-${{ matrix.lolminer }} .
