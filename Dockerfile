@@ -1,11 +1,11 @@
 ARG LOLMINER_VERSION=1.52a
 ARG CUDA_VERSION=11.4.2
 ARG OS_VERSION=ubuntu20.04
-ARG AMD_VERSION=ubuntu_20.04_21.30
+ARG AMD_DRIVER=21.30
 
 ##########################################################
 # amd
-FROM compscidr/amdgpu:${AMD_VERSION} as amd
+FROM compscidr/amdgpu:${OS_VERSION$}-{AMD_VERSION} as amd
 ARG LOLMINER_VERSION
 
 # todo split out amd gpu pro into another docker image
