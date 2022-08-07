@@ -17,7 +17,7 @@ jobs:
         run: docker build -f Dockerfile --build-arg LOLMINER_VERSION=${{ matrix.lolminer }} --build-arg OS_VERSION=${{ matrix.os }} --build-arg CUDA_VERSION=${{ matrix.cuda }} --target nvidia -t lolminer-docker:${{ matrix.os }}-cuda-${{ matrix.cuda }}-${{ matrix.lolminer }} .
 
   build-amd:
-    strategy:strategy:
+    strategy:
       matrix:
         os: [ubuntu20.04,ubuntu22.04]
         amd_driver: ["21.30", "22.20"]
