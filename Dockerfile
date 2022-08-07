@@ -5,7 +5,7 @@ ARG AMD_DRIVER=21.30
 
 ##########################################################
 # amd
-FROM compscidr/amdgpu:${OS_VERSION$}-${AMD_DRIVER} as amd
+FROM compscidr/amdgpu:${OS_VERSION}-${AMD_DRIVER} as amd
 ARG LOLMINER_VERSION
 
 # todo split out amd gpu pro into another docker image
