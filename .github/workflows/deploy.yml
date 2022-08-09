@@ -2,7 +2,7 @@ name: Deploy containers
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - 'Dockerfile'
       - '.github/workflows/deploy.yml'
