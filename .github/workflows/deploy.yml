@@ -1,31 +1,62 @@
-name: Deploy container
+name: Deploy containers
 on:
-  release:
-    types:
-      - published
+  push:
+    branches:
+      - master
+    paths:
+      - 'Dockerfile'
+      - '.github/workflows/deploy.yml'
 
 jobs:
-  deploy:
-    name: Deploy container
+  build-nvidia:
+    strategy:
+      matrix:
+        os: [ubuntu20.04]
+        cuda: [11.4.2]
+        lolminer: [1.52a, 1.53]
     runs-on: ubuntu-20.04
+    name: Deploy Nvidia Containers
     steps:
       - uses: actions/checkout@v3
       - name: Login to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-      - name: build amd image
-        run: docker build -f Dockerfile --target amd -t lolminer-docker:amd-${{ github.sha }} .
-      - name: build nvidia image
-        run: docker build -f Dockerfile --target nvidia -t lolminer-docker:nvidia-${{ github.sha }} .
+      - name: build and tag nvidia image
+        run: docker build -f Dockerfile --build-arg CUDA_VERSION=${{ matrix.cuda }} --target nvidia -t compscidr/lolminer-docker:${{ matrix.os }}-cuda-${{ matrix.cuda }}-${{ matrix.lolminer }} .
       - name: tag and push
         run: |
-          docker tag lolminer-docker:amd-${{ github.sha }} compscidr/lolminer-docker:amd-${{ github.event.release.tag_name }}
-          docker push compscidr/lolminer-docker:amd-${{ github.event.release.tag_name }}
-          docker tag lolminer-docker:amd-${{ github.sha }} compscidr/lolminer-docker:latest
+          docker push compscidr/lolminer-docker:${{ matrix.os }}-cuda-${{ matrix.cuda }}-${{ matrix.lolminer }}
+          docker tag compscidr/lolminer-docker:${{ matrix.os }}-cuda-${{ matrix.cuda }}-${{ matrix.lolminer }} compscidr/lolminer-docker:latest
           docker push compscidr/lolminer-docker:latest
-          docker tag lolminer-docker:nvidia-${{ github.sha }} compscidr/lolminer-docker:nvidia-${{ github.event.release.tag_name }}
-          docker push compscidr/lolminer-docker:nvidia-${{ github.event.release.tag_name }}
+      - name: Logout of Docker Hub
+        run: docker logout
+
+  build-amd:
+    strategy:
+      matrix:
+        os: [ubuntu20.04,ubuntu22.04]
+        amd_driver: ["21.30", "22.20"]
+        lolminer: [1.52a, 1.53]
+        exclude:
+          - os: ubuntu22.04
+            amd_driver: "21.30"
+    runs-on: ubuntu-20.04
+    name: Deploy AMD Containers
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: build and tag amd image
+        run: docker build -f Dockerfile --target amd  --build-arg LOLMINER_VERSION=${{ matrix.lolminer }} --build-arg OS_VERSION=${{ matrix.os }} --build-arg AMD_DRIVER=${{ matrix.amd_driver }} -t compscidr/lolminer-docker:${{ matrix.os }}-amd-${{ matrix.amd_driver }}-${{ matrix.lolminer }} .
+      - name: tag and push
+        run: |
+          docker push compscidr/lolminer-docker:${{ matrix.os }}-amd-${{ matrix.amd_driver }}-${{ matrix.lolminer }}
+          docker tag compscidr/lolminer-docker:${{ matrix.os }}-amd-${{ matrix.amd_driver }}-${{ matrix.lolminer }} compscidr/lolminer-docker:latest
+          docker push compscidr/lolminer-docker:latest
       - name: Logout of Docker Hub
         run: docker logout
