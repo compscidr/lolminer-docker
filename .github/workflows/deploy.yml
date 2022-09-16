@@ -13,7 +13,7 @@ jobs:
       matrix:
         os: [ubuntu20.04,ubuntu22.04]
         cuda: [11.4.2,11.7.1]
-        lolminer: [1.52a,1.53,1.54,1.55a,1.56,1.57]
+        lolminer: [1.52a,1.53,1.54,1.56,1.57]
     runs-on: ubuntu-20.04
     name: Deploy Nvidia Containers
     steps:
@@ -38,7 +38,7 @@ jobs:
       matrix:
         os: [ubuntu20.04,ubuntu22.04]
         amd_driver: ["21.30", "22.20"]
-        lolminer: [1.52a,1.53,1.54,1.55a,1.56,1.57]
+        lolminer: [1.52a,1.53,1.54,1.56,1.57]
         exclude:
           - os: ubuntu22.04
             amd_driver: "21.30"
