@@ -1,6 +1,6 @@
 ARG LOLMINER_VERSION=1.52a
-ARG CUDA_VERSION=11.4.2
-ARG OS_VERSION=ubuntu20.04
+ARG CUDA_VERSION=11.7.1
+ARG OS_VERSION=ubuntu22.04
 ARG AMD_DRIVER=21.30
 
 ##########################################################

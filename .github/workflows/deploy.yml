@@ -11,9 +11,9 @@ jobs:
   build-nvidia:
     strategy:
       matrix:
-        os: [ubuntu20.04]
-        cuda: [11.4.2]
-        lolminer: [1.52a, 1.53]
+        os: [ubuntu20.04,ubuntu22.04]
+        cuda: [11.4.2,11.7.1]
+        lolminer: [1.52a, 1.53,1.54,1.55a,1.56.1,57]
     runs-on: ubuntu-20.04
     name: Deploy Nvidia Containers
     steps:
@@ -24,7 +24,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: build and tag nvidia image
-        run: docker build -f Dockerfile --build-arg CUDA_VERSION=${{ matrix.cuda }} --target nvidia -t compscidr/lolminer-docker:${{ matrix.os }}-cuda-${{ matrix.cuda }}-${{ matrix.lolminer }} .
+        run: docker build -f Dockerfile --target nvidia --build-arg LOLMINER_VERSION=${{ matrix.lolminer }} --build-arg OS_VERSION=${{ matrix.os }} --build-arg CUDA_VERSION=${{ matrix.cuda }} -t lolminer-docker:${{ matrix.os }}-cuda-${{ matrix.cuda }}-${{ matrix.lolminer }} .
       - name: tag and push
         run: |
           docker push compscidr/lolminer-docker:${{ matrix.os }}-cuda-${{ matrix.cuda }}-${{ matrix.lolminer }}
@@ -38,7 +38,7 @@ jobs:
       matrix:
         os: [ubuntu20.04,ubuntu22.04]
         amd_driver: ["21.30", "22.20"]
-        lolminer: [1.52a, 1.53]
+        lolminer: [1.52a, 1.53,1.54,1.55a,1.56.1,57]
         exclude:
           - os: ubuntu22.04
             amd_driver: "21.30"
@@ -52,7 +52,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: build and tag amd image
-        run: docker build -f Dockerfile --target amd  --build-arg LOLMINER_VERSION=${{ matrix.lolminer }} --build-arg OS_VERSION=${{ matrix.os }} --build-arg AMD_DRIVER=${{ matrix.amd_driver }} -t compscidr/lolminer-docker:${{ matrix.os }}-amd-${{ matrix.amd_driver }}-${{ matrix.lolminer }} .
+        run: docker build -f Dockerfile --target amd --build-arg LOLMINER_VERSION=${{ matrix.lolminer }} --build-arg OS_VERSION=${{ matrix.os }} --build-arg AMD_DRIVER=${{ matrix.amd_driver }} -t lolminer-docker:${{ matrix.os }}-amd-${{ matrix.amd_driver }}-${{ matrix.lolminer }} .
       - name: tag and push
         run: |
           docker push compscidr/lolminer-docker:${{ matrix.os }}-amd-${{ matrix.amd_driver }}-${{ matrix.lolminer }}
