@@ -8,7 +8,7 @@ jobs:
       matrix:
         os: [ubuntu20.04,ubuntu22.04]
         cuda: [11.4.2,11.7.1]
-        lolminer: [1.52a,1.53,1.54,1.56,1.57]
+        lolminer: [1.52a,1.53,1.54,1.56,1.57,1.58,1.60,1.61,1.62,1.63,1.64,1.65,1.66,1.67,1.69,1.70,1.71,1.72,1.73,1.74,1.75,1.76]
     runs-on: ubuntu-20.04
     name: Build Nvidia Containers
     steps:
