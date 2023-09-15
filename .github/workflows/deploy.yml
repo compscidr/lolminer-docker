@@ -104,7 +104,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: build and tag amd image
-        run: docker build -f Dockerfile --target amd --build-arg LOLMINER_VERSION=${{ matrix.lolminer }} --build-arg OS_VERSION=${{ matrix.os }} --build-arg AMD_DRIVER=${{ matrix.amd_driver }} -t lolminer-docker:${{ matrix.os }}-amd-${{ matrix.amd_driver }}-${{ matrix.lolminer }} .
+        run: docker build -f Dockerfile --target amd --build-arg LOLMINER_VERSION=${{ matrix.lolminer }} --build-arg OS_VERSION=${{ matrix.os }} --build-arg AMD_DRIVER=${{ matrix.amd_driver }} -t compscidr/lolminer-docker:${{ matrix.os }}-amd-${{ matrix.amd_driver }}-${{ matrix.lolminer }} .
       - name: tag and push
         run: |
           docker push compscidr/lolminer-docker:${{ matrix.os }}-amd-${{ matrix.amd_driver }}-${{ matrix.lolminer }}
