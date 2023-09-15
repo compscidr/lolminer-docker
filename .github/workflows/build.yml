@@ -6,7 +6,9 @@ jobs:
   build-nvidia:
     strategy:
       matrix:
-        os: [ubuntu20.04,ubuntu22.04]
+        os:
+          - "ubuntu20.04"
+          - "ubuntu22.04"
         cuda:
           - "11.7.1"
           - "12.2.0"
@@ -43,7 +45,9 @@ jobs:
   build-amd:
     strategy:
       matrix:
-        os: [ubuntu20.04,ubuntu22.04]
+        os:
+          - "ubuntu20.04"
+          - "ubuntu22.04"
         amd_driver:
           - "21.30"
           - "22.20"
@@ -71,8 +75,8 @@ jobs:
           - "1.75"
           - "1.76"
         exclude:
-          - os: ubuntu22.04
-            amd_driver: "21.30"
+          - os: "ubuntu22.04"
+          - amd_driver: "21.30"
     runs-on: ubuntu-20.04
     name: Build AMD Containers
     steps:
