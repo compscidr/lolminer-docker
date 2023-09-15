@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-22.04
     name: Build Nvidia Containers
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: build nvidia image
         run: docker build -f Dockerfile --target nvidia --build-arg LOLMINER_VERSION=${{ matrix.lolminer }} --build-arg OS_VERSION=${{ matrix.os }} --build-arg CUDA_VERSION=${{ matrix.cuda }} -t lolminer-docker:${{ matrix.os }}-cuda-${{ matrix.cuda }}-${{ matrix.lolminer }} .
 
@@ -80,6 +80,6 @@ jobs:
     runs-on: ubuntu-22.04
     name: Build AMD Containers
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: build amd image
         run: docker build -f Dockerfile --target amd --build-arg LOLMINER_VERSION=${{ matrix.lolminer }} --build-arg OS_VERSION=${{ matrix.os }} --build-arg AMD_DRIVER=${{ matrix.amd_driver }} -t lolminer-docker:${{ matrix.os }}-amd-${{ matrix.amd_driver }}-${{ matrix.lolminer }} .
