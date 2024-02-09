@@ -45,6 +45,7 @@ jobs:
           - "1.80"
           - "1.81"
           - "1.82"
+          - "1.82a"
     runs-on: ubuntu-22.04
     name: Deploy Nvidia Containers
     steps:
@@ -101,6 +102,7 @@ jobs:
           - "1.80"
           - "1.81"
           - "1.82"
+          - "1.82a"
         exclude:
           - os: "ubuntu22.04"
           - amd_driver: "21.30"

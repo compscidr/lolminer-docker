@@ -3,7 +3,7 @@
 Tried to make it as simple as possible to run the miner without worrying about
 drivers or the mining software (at least on amd). The docker images are named as follows:
 `ubuntu<ubuntu-version>-<cuda/amd-version>-<lolminer version>`. For instance:
-`ubuntu22.04-cuda-11.7.1-1.82` or `ubuntu22.04-amd-21.30-1.82`
+`ubuntu22.04-cuda-11.7.1-1.82a` or `ubuntu22.04-amd-21.30-1.82a`
 
 ## amd:
 Tested with Ubuntu 20.04 and 20.10 host operating systems without any special
@@ -15,12 +15,12 @@ For physical hardware, tested with rx580, rx480 gpus.
 https://hub.docker.com/repository/docker/compscidr/lolminer-docker
 From dockerhub:
 ```
-docker run --device=/dev/dri:/dev/dri compscidr/lolminer-docker:ubuntu22.04-amd-21.30-1.82 <insert lolminer args>
+docker run --device=/dev/dri:/dev/dri compscidr/lolminer-docker:ubuntu22.04-amd-21.30-1.82a <insert lolminer args>
 ```
 
 For instance:
 ```
-docker run --device=/dev/dri:/dev/dri compscidr/lolminer-docker:ubuntu22.04-amd-21.30-1.82 --coin ETH --pool eth.2miners.com --port 2020 --user 0x74ba897f65f04008d8eff364efcc54b0a20e17eb.amd-docker --apihost 0.0.0.0 --apiport 4069
+docker run --device=/dev/dri:/dev/dri compscidr/lolminer-docker:ubuntu22.04-amd-21.30-1.82a--coin ETH --pool eth.2miners.com --port 2020 --user 0x74ba897f65f04008d8eff364efcc54b0a20e17eb.amd-docker --apihost 0.0.0.0 --apiport 4069
 ```
 
 The only fees are the lolminer fees, I didn't add any additional fees.
@@ -38,7 +38,7 @@ sudo systemctl restart docker
 
 Then you can run as follows:
 ```
-docker run --gpus all compscidr/lolminer-docker:ubuntu22.04-cuda-11.7.1-1.82 --coin ETH --pool eth.2miners.com --port 2020 --user 0x74ba897f65f04008d8eff364efcc54b0a20e17eb.nvidia-docker --apihost 0.0.0.0 --apiport 4069
+docker run --gpus all compscidr/lolminer-docker:ubuntu22.04-cuda-11.7.1-1.82a --coin ETH --pool eth.2miners.com --port 2020 --user 0x74ba897f65f04008d8eff364efcc54b0a20e17eb.nvidia-docker --apihost 0.0.0.0 --apiport 4069
 ```
 
 Confirmed working with a ubuntu20.04 host and an nvidia rtx 3080 gpu. On a fresh
