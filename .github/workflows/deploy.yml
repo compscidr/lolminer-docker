@@ -46,6 +46,8 @@ jobs:
           - "1.81"
           - "1.82"
           - "1.82a"
+          - "1.83"
+          - "1.84"
     runs-on: ubuntu-22.04
     name: Deploy Nvidia Containers
     steps:
@@ -103,6 +105,9 @@ jobs:
           - "1.81"
           - "1.82"
           - "1.82a"
+          - "1.83"
+          - "1.84"
+        "
         exclude:
           - os: "ubuntu22.04"
           - amd_driver: "21.30"
@@ -123,4 +128,4 @@ jobs:
           docker tag compscidr/lolminer-docker:${{ matrix.os }}-amd-${{ matrix.amd_driver }}-${{ matrix.lolminer }} compscidr/lolminer-docker:latest
           docker push compscidr/lolminer-docker:latest
       - name: Logout of Docker Hub
-        run: docker logout
+        run: dock
