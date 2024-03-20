@@ -1,6 +1,6 @@
 ![https://github.com/compscidr/lolminer-docker/actions/workflows/build.yml](https://github.com/compscidr/lolminer-docker/actions/workflows/build.yml/badge.svg)
 # lolminer-docker
-Tried to make it as simple as possible to run the miner without worrying about
+Tried to make it as simple as possible to run [lolminer](https://github.com/Lolliedieb/lolMiner-releases) without worrying about
 drivers or the mining software (at least on amd). The docker images are named as follows:
 `ubuntu<ubuntu-version>-<cuda/amd-version>-<lolminer version>`. For instance:
 `ubuntu22.04-cuda-11.7.1-1.84` or `ubuntu22.04-amd-21.30-1.84`
