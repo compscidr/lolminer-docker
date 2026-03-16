@@ -1,15 +1,18 @@
 {
-    "customManagers": [
-        {
-            "customType": "regex",
-            "fileMatch": [
-                "Dockerfile"
-            ],
-            "matchStrings": [
-                "ARG LOLMINER_VERSION=[\"']?(?<currentValue>.+?)[\"']?\\s+"
-            ],
-            "datasourceTemplate": "githbub-releases",
-            "depNameTemplate": "Lolliedieb/lolMiner-releases"
-        }
-    ]
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "Dockerfile"
+      ],
+      "matchStrings": [
+        "ARG LOLMINER_VERSION=[\"']?(?<currentValue>.+?)[\"']?\\s+"
+      ],
+      "datasourceTemplate": "githbub-releases",
+      "depNameTemplate": "Lolliedieb/lolMiner-releases"
+    }
+  ],
+  "automerge": true,
+  "automergeType": "pr",
+  "platformAutomerge": true
 }
